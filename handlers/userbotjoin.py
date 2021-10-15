@@ -46,8 +46,8 @@ async def addchannel(client, message):
         user.first_name = "music assistant"
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id, "🤖: i'm joined here for playing music on voice chat")
-        await USER.send_sticker(message.chat.id, "CAACAgUAAx0CS5UEcQAC6BdhZaHUhBmtEuQ2LEjwx84GsKd67gACVgMAArWI8Vah1KOAZ_NCzyEE")
+        await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFw1hag-0T8_synP6TjCJJIKmY5jA4QACSAUAAsrZCVe96vZH7PYediEE")
+        await USER.send_message(message.chat.id, "**__I'm joined here for playing music on voice chat__**")
     except UserAlreadyParticipant:
         await message.reply_text(f"<b>✅ userbot already joined chat</b>")
     except Exception as e:
@@ -64,7 +64,7 @@ async def addchannel(client, message):
 @authorized_users_only
 async def rem(client, message):
     try:
-        await USER.send_message(message.chat.id, "✅ userbot successfully left group")
+        await USER.send_message(message.chat.id, "✅ bye bye im leaving your group")
         await USER.leave_chat(message.chat.id)
     except:
         await message.reply_text("<b>user couldn't leave your group, may be floodwaits.\n\nor manually kick me from your group</b>")
