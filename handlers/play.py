@@ -538,10 +538,9 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🎼 Playlist ", callback_data="playlist"),
-                    InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
-                ],
-                [InlineKeyboardButton(text=" 🗑️ Close", callback_data="cls")],
+                    InlineKeyboardButton("⚙️ Menu ", callback_data="menu"),
+                    InlineKeyboardButton("🗑️ Close ", callback_data="closed"),
+                ]
             ]
         )
         file_name = get_file_name(audio)
