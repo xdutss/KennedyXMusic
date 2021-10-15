@@ -585,7 +585,9 @@ async def play(_, message: Message):
                 InlineKeyboardButton("▶️", "resume"),
                 InlineKeyboardButton("⏭", "skip"),
             ],
-            [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
+            [
+                InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+            ]
          ]
         )
         requested_by = message.from_user.first_name
@@ -654,18 +656,19 @@ async def play(_, message: Message):
                 print(str(e))
                 return
             dlurl=url
-            dlurl=dlurl.replace("youtube","youtubepp")
-            keyboard = InlineKeyboardMarkup(
-             [
-                [
-                    InlineKeyboardButton("⏹", "leave"),
-                    InlineKeyboardButton("⏸", "puse"),
-                    InlineKeyboardButton("▶️", "resume"),
-                    InlineKeyboardButton("⏭", "skip"),
-                ],
-                [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
+        keyboard = InlineKeyboardMarkup(
+         [
+            [
+                InlineKeyboardButton("⏹", "leave"),
+                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("▶️", "resume"),
+                InlineKeyboardButton("⏭", "skip"),
+            ],
+            [
+                InlineKeyboardButton("🗑️ Close", callback_data="closed"),
             ]
-           )
+          ]
+         )
             requested_by = message.from_user.first_name
             await generate_cover(title, thumbnail, ctitle)
             file_path = await converter.convert(youtube.download(url))   
@@ -758,13 +761,15 @@ async def lol_cb(b, cb):
     dlurl=dlurl.replace("youtube", "youtubepp")
     keyboard = InlineKeyboardMarkup(
      [
-         [
+        [
             InlineKeyboardButton("⏹", "leave"),
             InlineKeyboardButton("⏸", "puse"),
             InlineKeyboardButton("▶️", "resume"),
             InlineKeyboardButton("⏭", "skip"),
-         ],
-        [InlineKeyboardButton("🗑️", callback_data"closed")],
+        ],
+        [
+            InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+        ]
      ]
     )
     requested_by = useer_name
@@ -914,7 +919,9 @@ async def ytplay(_, message: Message):
             InlineKeyboardButton("▶️", "resume"),
             InlineKeyboardButton("⏭", "skip"),
         ],
-        [InlineKeyboardButton("🗑️", callback_data"closed")],
+        [
+            InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+        ]
      ]
     )
     requested_by = message.from_user.first_name
