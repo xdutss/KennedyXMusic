@@ -18,7 +18,6 @@ future
 pyaml
 psutil
 wget
-python-arq
 httpx==0.13.3
 gitpython
 pykeyboard
