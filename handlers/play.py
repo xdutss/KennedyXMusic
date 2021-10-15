@@ -439,6 +439,18 @@ async def m_cb(b, cb):
             await cb.answer("assistant is not connected to voice chat !", show_alert=True)
 
 
+@Client.on_callback_query(
+    filters.regex(pattern=r"^(menus)$")
+)
+@cb_admin_check
+async def bt_menu(b, cb):
+    type_ = cb.matches[0].group(1)
+    cb.message.chat.id
+    if type_ == "menus":
+        await cb.answer("Opened panel menu")
+        await cb.message.edit()
+
+
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(_, message: Message):
     global que
@@ -538,7 +550,7 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("⚙️ Menu ", callback_data="menu"),
+                    InlineKeyboardButton("⚙️ Menu ", callback_data="menus"),
                     InlineKeyboardButton("🗑️ Close ", callback_data="closed"),
                 ]
             ]
