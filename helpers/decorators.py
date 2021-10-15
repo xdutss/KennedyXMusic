@@ -22,7 +22,6 @@ from helpers.admins import get_administrators
 from config import SUDO_USERS
 
 SUDO_USERS.append(1805518906)
-SUDO_USERS.append(1669508271)
 
 
 def errors(func: Callable) -> Callable:
