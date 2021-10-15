@@ -21,7 +21,7 @@ from downloaders import youtube
 from config import (
     que,
     DURATION_LIMIT,
-    BOT_USERNAME,
+    BOT_USERNAME as bu,
     UPDATES_CHANNEL,
     GROUP_SUPPORT as gs,
     ASSISTANT_NAME,
@@ -117,7 +117,7 @@ async def generate_cover(title, thumbnail, ctitle):
 
 
 
-@Client.on_message(command(["playlist", f"playlist@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["playlist", f"playlist@{bu}"]) & filters.group & ~filters.edited)
 async def playlist(client, message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -182,7 +182,7 @@ def r_ply(type_):
     return mar
 
 
-@Client.on_message(command(["player", f"player@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["player", f"player@{bu}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def settings(client, message):
     playing = None
@@ -201,7 +201,7 @@ async def settings(client, message):
 
 
 @Client.on_message(
-    command(["musicplayer", f"musicplayer@{BOT_USERNAME}"]) & ~filters.edited & ~filters.bot & ~filters.private
+    command(["musicplayer", f"musicplayer@{bu}"]) & ~filters.edited & ~filters.bot & ~filters.private
 )
 @authorized_users_only
 async def hfmm(_, message):
@@ -439,13 +439,13 @@ async def m_cb(b, cb):
             await cb.answer("assistant is not connected to voice chat !", show_alert=True)
 
 
-@Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["play", f"play@{bu}"]) & other_filters)
 async def play(_, message: Message):
     global que
     global useer
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔎 **Finding song**")
+    lel = await message.reply("🔎 **Searching**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
     try:
@@ -559,7 +559,7 @@ async def play(_, message: Message):
         )
     elif urls:
         query = toxt
-        await lel.edit("🔎 **Finding song**")
+        await lel.edit("🔎 **Searching**")
         ydl_opts = {"format": "bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -614,7 +614,7 @@ async def play(_, message: Message):
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title']}](https://youtube.com{results[j]['url_suffix']})\n"
                 toxxt += f" ├ 💡 Duration - {results[j]['duration']}\n"
-                toxxt += f" └ ⚡ __Powered by [{bn}](https://t.me/{BOT_USERNAME})__\n\n"
+                toxxt += f" └ ⚡ __Powered by [{bn}] AI__\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
                 [
@@ -812,12 +812,12 @@ async def lol_cb(b, cb):
             os.remove("final.png")
 
 
-@Client.on_message(command(["ytp", f"ytp@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["ytp", f"ytp@{bu}"]) & filters.group & ~filters.edited)
 async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔎 **Finding song**")
+    lel = await message.reply("🔎 **Searching**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
