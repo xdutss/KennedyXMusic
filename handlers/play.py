@@ -443,12 +443,12 @@ async def m_cb(b, cb):
     filters.regex(pattern=r"^(menus)$")
 )
 @cb_admin_check
-async def bt_menu(b, cb):
+async def bt_settings(b, cb):
     type_ = cb.matches[0].group(1)
     cb.message.chat.id
     if type_ == "menus":
         await cb.answer("Opened panel menu")
-        await cb.message.edit_text()
+        await cb.message.edit()
 
 
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
