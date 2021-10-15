@@ -474,9 +474,8 @@ async def play(_, message: Message):
                     return
                 try:
                     await USER.join_chat(invitelink)
-                    await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFwphagxkKoPyELn4wG_hTBCVh18pWwACOAMAAq2ZsVaiSmGtxU9jFSEE")
                     await USER.send_message(
-                        message.chat.id, "🤖: i'm joined to this group for playing music on voice chat"
+                        message.chat.id, "**__I'm joined to this group for playing music on voice chat__**"
                     )
                     await lel.edit(
                         "<b>💡 helper userbot joined your chat</b>",
@@ -848,9 +847,8 @@ async def ytplay(_, message: Message):
                     return
                 try:
                     await USER.join_chat(invitelink)
-                    await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFwphagxkKoPyELn4wG_hTBCVh18pWwACOAMAAq2ZsVaiSmGtxU9jFSEE")
                     await USER.send_message(
-                        message.chat.id, "🤖: assistant telah bergabung ke grup untuk memutar musik"
+                        message.chat.id, "**__I'm joined your group for playing music__**"
                     )
                     await lel.edit(
                         "<b>💡 Helper userbot joined!\n\n• Jika terjadi masalah, laporkan ke @kenbotsupport</b>",
