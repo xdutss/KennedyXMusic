@@ -25,7 +25,6 @@ from config import (
     UPDATES_CHANNEL,
     GROUP_SUPPORT,
     ASSISTANT_NAME,
-    aiohttpsession,
     BOT_NAME as bn,
 )
 from helpers.chattitle import CHAT_TITLE
