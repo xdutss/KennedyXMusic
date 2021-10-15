@@ -530,19 +530,17 @@ async def play(_, message: Message):
                 f"❌ **music with duration more than** `{DURATION_LIMIT}` **minutes, can't play !**"
             )
         keyboard = InlineKeyboardMarkup(
-         [
             [
-                InlineKeyboardButton("⏹", "leave"),
-                InlineKeyboardButton("⏸", "puse"),
-                InlineKeyboardButton("▶️", "resume"),
-                InlineKeyboardButton("⏭", "skip"),
-            ],
-            [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
-         ]
+                [
+                    InlineKeyboardButton("🎼 Playlist ", callback_data="playlist"),
+                    InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
+                ],
+                [InlineKeyboardButton(text=" 🗑️ Close", callback_data="cls")],
+            ]
         )
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://telegra.ph/file/fa2cdb8a14a26950da711.png"
+        thumb_name = "https://telegra.ph/file/f6086f8909fbfeb0844f2.png"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
