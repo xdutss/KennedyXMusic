@@ -474,6 +474,7 @@ async def play(_, message: Message):
                     return
                 try:
                     await USER.join_chat(invitelink)
+                    await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFwphagxkKoPyELn4wG_hTBCVh18pWwACOAMAAq2ZsVaiSmGtxU9jFSEE")
                     await USER.send_message(
                         message.chat.id, "🤖: i'm joined to this group for playing music on voice chat"
                     )
@@ -847,6 +848,7 @@ async def ytplay(_, message: Message):
                     return
                 try:
                     await USER.join_chat(invitelink)
+                    await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFwphagxkKoPyELn4wG_hTBCVh18pWwACOAMAAq2ZsVaiSmGtxU9jFSEE")
                     await USER.send_message(
                         message.chat.id, "🤖: assistant telah bergabung ke grup untuk memutar musik"
                     )
