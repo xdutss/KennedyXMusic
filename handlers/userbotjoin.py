@@ -46,8 +46,8 @@ async def addchannel(client, message):
         user.first_name = "music assistant"
     try:
         await USER.join_chat(invitelink)
-        await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFw1hag-0T8_synP6TjCJJIKmY5jA4QACSAUAAsrZCVe96vZH7PYediEE")
         await USER.send_message(message.chat.id, "**__I'm joined here for playing music on voice chat__**")
+        await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFw1hag-0T8_synP6TjCJJIKmY5jA4QACSAUAAsrZCVe96vZH7PYediEE")
     except UserAlreadyParticipant:
         await message.reply_text(f"<b>✅ userbot already joined chat</b>")
     except Exception as e:
@@ -64,6 +64,7 @@ async def addchannel(client, message):
 @authorized_users_only
 async def rem(client, message):
     try:
+        await USER.send_sticker(message.chat.id, "CAACAgUAAx0CUNF_sQACFw1hag-0T8_synP6TjCJJIKmY5jA4QACSAUAAsrZCVe96vZH7PYediEE")
         await USER.send_message(message.chat.id, "✅ bye bye im leaving your group")
         await USER.leave_chat(message.chat.id)
     except:
