@@ -17,13 +17,8 @@ Pillow
 future
 pyaml
 psutil
-yt-dlp
-bs4
-psutil
 wget
 python-arq
 httpx==0.13.3
-heroku3
 gitpython
 pykeyboard
-telegraph
