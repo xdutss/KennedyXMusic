@@ -448,7 +448,7 @@ async def bt_menu(b, cb):
     cb.message.chat.id
     if type_ == "menus":
         await cb.answer("Opened panel menu")
-        await cb.message.edit()
+        await cb.message.edit_text()
 
 
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
