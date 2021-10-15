@@ -530,12 +530,15 @@ async def play(_, message: Message):
                 f"❌ **music with duration more than** `{DURATION_LIMIT}` **minutes, can't play !**"
             )
         keyboard = InlineKeyboardMarkup(
+         [
             [
-                [
-                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                    InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="closed")
-                ],
-            ]
+                InlineKeyboardButton("⏹", "leave"),
+                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("▶️", "resume"),
+                InlineKeyboardButton("⏭", "skip"),
+            ],
+            [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
+         ]
         )
         file_name = get_file_name(audio)
         title = file_name
@@ -577,12 +580,15 @@ async def play(_, message: Message):
         dlurl=url
         dlurl=dlurl.replace("youtube","youtubepp")
         keyboard = InlineKeyboardMarkup(
+         [
             [
-                [
-                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                    InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="closed")
-                ],
-            ]
+                InlineKeyboardButton("⏹", "leave"),
+                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("▶️", "resume"),
+                InlineKeyboardButton("⏭", "skip"),
+            ],
+            [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
+         ]
         )
         requested_by = message.from_user.first_name
         await generate_cover(title, thumbnail, ctitle)
@@ -652,13 +658,16 @@ async def play(_, message: Message):
             dlurl=url
             dlurl=dlurl.replace("youtube","youtubepp")
             keyboard = InlineKeyboardMarkup(
-            [
+             [
                 [
-                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                    InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="closed")
+                    InlineKeyboardButton("⏹", "leave"),
+                    InlineKeyboardButton("⏸", "puse"),
+                    InlineKeyboardButton("▶️", "resume"),
+                    InlineKeyboardButton("⏭", "skip"),
                 ],
+                [InlineKeyboardButton("🗑️ Close", callback_data"closed")],
             ]
-        )
+           )
             requested_by = message.from_user.first_name
             await generate_cover(title, thumbnail, ctitle)
             file_path = await converter.convert(youtube.download(url))   
@@ -750,13 +759,16 @@ async def lol_cb(b, cb):
     dlurl=url
     dlurl=dlurl.replace("youtube", "youtubepp")
     keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                    InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="closed")
-                ],
-            ]
-        )
+     [
+         [
+            InlineKeyboardButton("⏹", "leave"),
+            InlineKeyboardButton("⏸", "puse"),
+            InlineKeyboardButton("▶️", "resume"),
+            InlineKeyboardButton("⏭", "skip"),
+         ],
+        [InlineKeyboardButton("🗑️", callback_data"closed")],
+     ]
+    )
     requested_by = useer_name
     await generate_cover(title, thumbnail, ctitle)
     file_path = await converter.convert(youtube.download(url))  
@@ -897,13 +909,16 @@ async def ytplay(_, message: Message):
     dlurl=url
     dlurl=dlurl.replace("youtube","youtubepp")
     keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                    InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="closed")
-                ],
-            ]
-        )
+     [
+        [
+            InlineKeyboardButton("⏹", "leave"),
+            InlineKeyboardButton("⏸", "puse"),
+            InlineKeyboardButton("▶️", "resume"),
+            InlineKeyboardButton("⏭", "skip"),
+        ],
+        [InlineKeyboardButton("🗑️", callback_data"closed")],
+     ]
+    )
     requested_by = message.from_user.first_name
     await generate_cover(title, thumbnail, ctitle)
     file_path = await converter.convert(youtube.download(url))
