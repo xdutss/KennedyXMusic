@@ -499,14 +499,21 @@ async def play(_, message: Message):
         return
     text_links=None
     if message.reply_to_message:
-        if message.reply_to_message.audio or message.reply_to_message.voice:
+        if message.reply_to_message.audio.title:
             pass
         entities = []
-        toxt = message.reply_to_message.text or message.reply_to_message.caption
-        if message.reply_to_message.entities:
-            entities = message.reply_to_message.entities + entities
-        elif message.reply_to_message.caption_entities:
-            entities = message.reply_to_message.entities + entities
+        if message.entities:
+            entities += entities
+        elif message.caption_entities:
+            entities += message.caption_entities
+        if message.reply_to_message:
+            text = message.reply_to_message.text \
+                or message.reply_to_message.caption
+            if message.reply_to_message.entities:
+                entities = message.reply_to_message.entities + entities
+        else:
+            text = message.text or message.caption
+
         urls = [entity for entity in entities if entity.type == 'url']
         text_links = [
             entity for entity in entities if entity.type == 'text_link'
@@ -580,7 +587,7 @@ async def play(_, message: Message):
          [
             [
                 InlineKeyboardButton("⏹", "leave"),
-                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("⏸", "pause"),
                 InlineKeyboardButton("▶️", "resume"),
                 InlineKeyboardButton("⏭", "skip"),
             ],
@@ -659,7 +666,7 @@ async def play(_, message: Message):
                  [
             [
                 InlineKeyboardButton("⏹", "leave"),
-                InlineKeyboardButton("⏸", "puse"),
+                InlineKeyboardButton("⏸", "pause"),
                 InlineKeyboardButton("▶️", "resume"),
                 InlineKeyboardButton("⏭", "skip"),
             ],
@@ -762,7 +769,7 @@ async def lol_cb(b, cb):
      [
         [
             InlineKeyboardButton("⏹", "leave"),
-            InlineKeyboardButton("⏸", "puse"),
+            InlineKeyboardButton("⏸", "pause"),
             InlineKeyboardButton("▶️", "resume"),
             InlineKeyboardButton("⏭", "skip"),
         ],
@@ -914,7 +921,7 @@ async def ytplay(_, message: Message):
      [
         [
             InlineKeyboardButton("⏹", "leave"),
-            InlineKeyboardButton("⏸", "puse"),
+            InlineKeyboardButton("⏸", "pause"),
             InlineKeyboardButton("▶️", "resume"),
             InlineKeyboardButton("⏭", "skip"),
         ],
