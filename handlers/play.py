@@ -685,7 +685,7 @@ async def play(_, message: Message):
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
-        url = f"https://www.youtube.com{resultss}"
+        url = f"https://t.me/{GROUP_SUPPORT}"
         r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
@@ -700,7 +700,7 @@ async def play(_, message: Message):
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = title
-        url = f"https://www.youtube.com{resultss}"
+        url = f"https://www.t.me/{GROUP_SUPPORT}"
         r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
