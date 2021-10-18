@@ -34,7 +34,7 @@ async def pause(client, message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "paused"
     ):
-        # await message.reply_text("eweh anjg")
+        await message.reply_text("❌ **nothing is playing**")
     else:
         callsmusic.pytgcalls.pause_stream(chat_id)
         await client.send_message(message.chat.id, "▶️ **Music paused!**\n\n• To resume the music playback, use **command » /resume**")
@@ -48,7 +48,7 @@ async def resume(client, message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "playing"
     ):
-        # await message.reply_text("eweh anjg")
+        await message.reply_text("❌ **Nothing is paused**")
     else:
         callsmusic.pytgcalls.resume_stream(chat_id)
         await client.send_message(message.chat.id, "⏸ **Music resumed!**\n\n• To pause the music playback, use **command » /pause**")
@@ -60,7 +60,7 @@ async def resume(client, message):
 async def stop(client, message):
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        # await message.reply_text("eweh anjg")
+        await message.reply_text("❌ **nothing is playing**")
     else:
         try:
             queues.clear(chat_id)
@@ -78,7 +78,7 @@ async def skip(client, message):
     global que
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        # await message.reply_text("eweh anjg")
+        # await message.reply_text("❌ **nothing is playing to skip**")
     else:
         queues.task_done(chat_id)
 
