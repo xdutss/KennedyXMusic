@@ -55,23 +55,23 @@ async def _human_time_duration(seconds):
 @Client.on_callback_query(filters.regex("cbstart"))
 async def cbstart(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""<b>👋 **Hello {message.from_user.mention}**</b> ❗
+        f"""<b>👋 **Hello [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})**</b> ❗
 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) Is a bot designed to play music in your voice chat groups!**
 **To see some commands for using this bot, click » /help**""",
         reply_markup=InlineKeyboardMarkup(
             [ 
                 [
                     InlineKeyboardButton(
-                        "➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+                        "➕ Add me to your group​ ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
                 ],[
                     InlineKeyboardButton(
-                        "ʀᴇᴘᴏ​​", url="https://github.com/KennedyProject/KennedyXMusic"
+                        "Source code​​", url="https://github.com/KennedyProject/KennedyXMusic"
                     ),
                     InlineKeyboardButton(
-                        "ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{GROUP_SUPPORT}")
+                        "Group Support", url=f"https://t.me/{GROUP_SUPPORT}")
                 ],[
                     InlineKeyboardButton(
-                        "ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ​ ❓​", callback_data="cbguide"
+                        "How to use me ❓​", callback_data="cbguide"
                     )
                 ]
             ]
@@ -109,10 +109,10 @@ __{bn} licensed under the GNU General Public License v.3.0__
             [
                 [
                     InlineKeyboardButton(
-                        "sᴏᴜʀᴄᴇ​​", url="https://github.com/KennedyProject/KennedyXMusic"
+                        "Github​​", url="https://github.com/KennedyProject/KennedyXMusic"
                     ),
                     InlineKeyboardButton(
-                        "ʙᴀᴄᴋ​", callback_data="cbadvanced"
+                        "🔙 Back​", callback_data="cbadvanced"
                     )
                 ]
             ]
@@ -151,7 +151,7 @@ async def cbhelp(_, query: CallbackQuery):
                 ],
                 [
                     InlineKeyboardButton(
-                        "BACK", callback_data="cbguide"
+                        "🔙 Back", callback_data="cbguide"
                     )
                 ]
             ]
@@ -186,7 +186,7 @@ async def cbbasic(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton(
-                        "BACK", callback_data="cbhelp"
+                        "🔙 Back", callback_data="cbhelp"
                     )
                 ]
             ]
@@ -215,10 +215,10 @@ async def cbadvanced(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton(
-                        "ᴀʙᴏᴜᴛ", callback_data="cbabout"
+                        "About me", callback_data="cbabout"
                     ),
                     InlineKeyboardButton(
-                        "ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        "Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
                     )
                 ]
             ]
@@ -244,7 +244,7 @@ async def cbadmin(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton(
-                        "BACK", callback_data="cbhelp"
+                        "🔙 Back", callback_data="cbhelp"
                     )
                 ]
             ]
@@ -273,7 +273,7 @@ if using heroku
             [
                 [
                     InlineKeyboardButton(
-                        "BACK", callback_data="cbhelp"
+                        "🔙 Back", callback_data="cbhelp"
                     )
                 ]
             ]
@@ -299,7 +299,7 @@ async def cbfun(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton(
-                        "BACK", callback_data="cbhelp"
+                        "🔙 Back", callback_data="cbhelp"
                     )
                 ]
             ]
@@ -338,3 +338,42 @@ async def cbguide(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("close"))
 async def close(_, query: CallbackQuery):
     await query.message.delete()
+
+
+@Client.on_callback_query(filters.regex("cbhplay"))
+async def cbhplay(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""How to play music on {bn} {alv}
+
+• `/play <query>` - for playing music via youtube
+• `/ytp <query>` - play music directly from youtube
+
+🔔 Updates channel [Click here](https://t.me/{UPDATES_CHANNEL})""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                   InlineKeyboardButton("🔙 Back", callback_data="cbplayback"),
+                ],
+            ]
+        ),
+    )
+
+
+@Client.on_callback_query(filters.regex("cbplayback"))
+async def cbplayback(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""**😕 Hey !! Give me something to play and searching on youtube.**""", 
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                   InlineKeyboardButton("Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                ],
+                [
+                   InlineKeyboardButton("Command", callback_data="cbhplay"),
+                ],
+                [
+                   InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+                ],
+            ]
+        ),
+    )
