@@ -18,15 +18,7 @@ from youtube_search import YoutubeSearch
 from callsmusic.callsmusic import client as USER
 from pyrogram.errors import UserAlreadyParticipant
 from downloaders import youtube
-from config import (
-    que,
-    DURATION_LIMIT,
-    BOT_USERNAME as bu,
-    UPDATES_CHANNEL,
-    GROUP_SUPPORT as gs,
-    ASSISTANT_NAME,
-    BOT_NAME as bn,
-)
+from config import que, THUMB_IMG, DURATION_LIMIT, BOT_USERNAME, UPDATES_CHANNEL, GROUP_SUPPORT, ASSISTANT_NAME, BOT_NAME
 from helpers.chattitle import CHAT_TITLE
 from helpers.filters import command, other_filters
 from helpers.decorators import authorized_users_only
@@ -117,7 +109,7 @@ async def generate_cover(title, thumbnail, ctitle):
 
 
 
-@Client.on_message(command(["playlist", f"playlist@{bu}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["playlist", f"playlist@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 async def playlist(client, message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -182,7 +174,7 @@ def r_ply(type_):
     return mar
 
 
-@Client.on_message(command(["player", f"player@{bu}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["player", f"player@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def settings(client, message):
     playing = None
@@ -201,7 +193,7 @@ async def settings(client, message):
 
 
 @Client.on_message(
-    command(["musicplayer", f"musicplayer@{bu}"]) & ~filters.edited & ~filters.bot & ~filters.private
+    command(["musicplayer", f"musicplayer@{BOT_USERNAME}"]) & ~filters.edited & ~filters.bot & ~filters.private
 )
 @authorized_users_only
 async def hfmm(_, message):
@@ -439,7 +431,7 @@ async def m_cb(b, cb):
             await cb.answer("assistant is not connected to voice chat !", show_alert=True)
 
 
-@Client.on_message(command(["play", f"play@{bu}"]) & other_filters)
+@Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(_, message: Message):
     global que
     global useer
@@ -485,7 +477,7 @@ async def play(_, message: Message):
                 except Exception:
                     # print(e)
                     await lel.edit(
-                        f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
+                        f"<b>⛑ Flood Wait Error ⛑\nAssistant tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
                         f"\n\nAtau tambahkan @{ASSISTANT_NAME} secara manual ke Grup Anda dan coba lagi</b>",
                     )
     try:
@@ -537,8 +529,8 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🎼 Support ", url=f"https://t.me/{gs}"),
-                    InlineKeyboardButton("🗑️ Close ", callback_data="closed"),
+                    InlineKeyboardButton("🔔 Support ", url=f"https://t.me/{GROUP_SUPPORT}"),
+                    InlineKeyboardButton("🗑️ Close", callback_data="closed"),
                 ]
             ]
         )
@@ -576,9 +568,7 @@ async def play(_, message: Message):
             results[0]["url_suffix"]
             views = results[0]["views"]
         except Exception as e:
-            await lel.edit(
-                "❌ **couldn't find song**, please provide the correct song name."
-            )
+            await lel.edit("❌ **couldn't find song**")
             print(str(e))
             return
         dlurl=url
@@ -586,7 +576,7 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
          [
             [
-                InlineKeyboardButton("🎼 Support", url=f"https://t.me/{gs}"),
+                InlineKeyboardButton("🔔 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton("🗑️ Close", callback_data="closed"),
             ]
          ]
@@ -614,7 +604,7 @@ async def play(_, message: Message):
             while j < 5:
                 toxxt += f"{emojilist[j]} [{results[j]['title']}](https://youtube.com{results[j]['url_suffix']})\n"
                 toxxt += f" ├ 💡 Duration - {results[j]['duration']}\n"
-                toxxt += f" └ ⚡ __Powered by [{bn}] AI__\n\n"
+                toxxt += f" └ ⚡ __Powered by {BOT_NAME} AI__\n\n"
                 j += 1            
             keyboard = InlineKeyboardMarkup(
                 [
@@ -630,8 +620,13 @@ async def play(_, message: Message):
                     [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
                 ]
             )
-            await lel.edit(toxxt,reply_markup=keyboard,disable_web_page_preview=True)
-            # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
+            await message.reply_photo(
+                photo=f"{THUMB_IMG}", 
+                caption=toxxt, 
+                reply_markup=keyboard
+            )
+            await lel.delete()
+            # veez project
             return
             # KONTOOOOOLLLLLLLLLLL
         except:
@@ -651,16 +646,32 @@ async def play(_, message: Message):
                 results[0]["url_suffix"]
                 views = results[0]["views"]
             except Exception as e:
-                await lel.edit(
-                    "❌ **couldn't find song**, please provide the correct song name."
+                await message.reply_photo(
+                photo=f"{THUMB_IMG}", 
+                caption="😕 **Hey !! Give me something to play and searching on youtube.**",  
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                           InlineKeyboardButton("Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                        ],
+                        [
+                           InlineKeyboardButton("Command", callback_data="cbhplay"),
+                        ],
+                        [
+                           InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+                        ],
+                    ]
                 )
+                )
+                await lel.delete()
+                # KennedyProject
                 print(str(e))
                 return
             dlurl=url
             keyboard = InlineKeyboardMarkup(
                  [
             [
-                InlineKeyboardButton("🎼 Support", url=f"https://t.me/{gs}"),
+                InlineKeyboardButton("🔔 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton("🗑️ Close", callback_data="closed"),
             ],
         ]
@@ -673,7 +684,7 @@ async def play(_, message: Message):
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
-        url = f"https://t.me/{gs}"
+        url = f"https://t.me/{GROUP_SUPPORT}"
         r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
@@ -688,7 +699,7 @@ async def play(_, message: Message):
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = title
-        url = f"https://t.me/{gs}"
+        url = f"https://t.me/{GROUP_SUPPORT}"
         r_by = message.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
@@ -723,7 +734,7 @@ async def lol_cb(b, cb):
     if cb.from_user.id != useer_id:
         await cb.answer("💡 this is not for you !", show_alert=True)
         return
-    await cb.message.edit("🔁 **Processing**")
+    await cb.message.delete("🔁 **Processing**")
     x=int(x)
     try:
         useer_name = cb.message.reply_to_message.from_user.first_name
@@ -742,7 +753,7 @@ async def lol_cb(b, cb):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
         if (dur / 60) > DURATION_LIMIT:
-             await cb.message.edit(f"❌ **music with duration more than** `{DURATION_LIMIT}` **minutes, can't play !**")
+             await cb.message.reply_text(f"❌ **music with duration more than** `{DURATION_LIMIT}` **minutes, can't play !**")
              return
     except:
         pass
@@ -760,7 +771,7 @@ async def lol_cb(b, cb):
     keyboard = InlineKeyboardMarkup(
      [
         [
-            InlineKeyboardButton("🎼 Support", url=f"https://t.me/{gs}"),
+            InlineKeyboardButton("🔔 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
             InlineKeyboardButton("🗑️ Close", callback_data="closed"),
         ]
      ]
@@ -812,7 +823,7 @@ async def lol_cb(b, cb):
             os.remove("final.png")
 
 
-@Client.on_message(command(["ytp", f"ytp@{bu}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["ytp", f"ytp@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -878,7 +889,6 @@ async def ytplay(_, message: Message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    await lel.edit("🔁 **Processing**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -896,9 +906,25 @@ async def ytplay(_, message: Message):
         views = results[0]["views"]
 
     except Exception as e:
-        await lel.edit(
-            "❌ **couldn't find song**, please provide the correct song name."
+        await message.reply_photo(
+        photo=f"{THUMB_IMG}", 
+        caption="😕 **Hey !! Give me something to play and searching on youtube.**", 
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                   InlineKeyboardButton("Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                ],
+                [
+                   InlineKeyboardButton("Command", callback_data="cbhplay"),
+                ],
+                [
+                   InlineKeyboardButton("🗑️ Close", callback_data="closed"),
+                ],
+            ]
         )
+        )
+        await lel.delete()
+        # KennedyProject
         print(str(e))
         return
     dlurl=url
@@ -906,7 +932,7 @@ async def ytplay(_, message: Message):
     keyboard = InlineKeyboardMarkup(
      [
         [
-            InlineKeyboardButton("🎼 Support", url=f"https://t.me/{gs}"),
+            InlineKeyboardButton("🔔 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
             InlineKeyboardButton("🗑️ Close", callback_data="closed"),
         ]
      ]
