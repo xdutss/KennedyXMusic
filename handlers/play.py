@@ -28,6 +28,7 @@ from cache.admins import admins as a
 from PIL import Image, ImageFont, ImageDraw
 
 
+aiohttpsession = aiohttp.ClientSession()
 chat_id = None
 useer ="NaN"
 DISABLED_GROUPS = []
