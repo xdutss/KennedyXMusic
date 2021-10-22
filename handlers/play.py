@@ -672,12 +672,12 @@ async def play(_, message: Message):
                     [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
                 ]
             )
+            await lel.delete()
             await _.send_photo(chid,
                 photo=f"{THUMB_IMG}", 
                 caption=toxxt, 
                 reply_markup=keyboard
             )
-            await lel.delete()
             return
 
         except:
@@ -695,6 +695,7 @@ async def play(_, message: Message):
                 results[0]["url_suffix"]
                 views = results[0]["views"]
             except Exception as e:
+                await lel.delete()
                 await _.send_photo(chid,
                 photo=f"{THUMB_IMG}", 
                 caption="😕 **Hey !! Give me something to play and searching on youtube.**",  
@@ -712,7 +713,6 @@ async def play(_, message: Message):
                     ]
                 )
                 )
-                await lel.delete()
                 print(str(e))
                 return
             dlurl=url
@@ -782,6 +782,7 @@ async def lol_cb(b, cb):
     if cb.from_user.id != useer_id:
         await cb.answer("💡 this is not for you !", show_alert=True)
         return
+    await cb.message.delete()
     await cb.answer("📥 Downloading your song")
     x=int(x)
     try:
