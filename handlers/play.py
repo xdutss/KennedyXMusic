@@ -994,7 +994,8 @@ async def ytplay(_, message: Message):
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
         await lel.delete()
-        await message.reply_photo(
+        await _.send_photo(
+            chid,
             photo="final.png",
             caption=f"🏷 **Name:** [{title}]({url})\n⏱ **Duration:** `{duration}`\n🎧 **Request by:** {r_by.mention}\n\n🔢 Track position » `{position}`",
                    reply_markup=keyboard,
@@ -1015,7 +1016,8 @@ async def ytplay(_, message: Message):
             message.reply("** sorry, no active voice chat here, please turn on the voice chat first**")
             return
         await lel.delete()
-        await message.reply_photo(
+        await _.send_photo(
+            chid,
             photo="final.png",
             caption = f"🏷 **Name:** [{title}]({url})\n⏱ **duration:** {duration}\n" \
                     + f"🎧 **Request by:** {r_by.mention} \n",
